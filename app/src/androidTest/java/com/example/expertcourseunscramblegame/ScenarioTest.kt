@@ -99,7 +99,7 @@ class ScenarioTest {
         gamePage.removeInputLastLetter()
         gamePage.assertInSufficientState()
 
-        gamePage.addLetters(text = "l")
+        gamePage.addInput(text = "l")
         gamePage.assertSufficientState()
 
         gamePage.removeInputLastLetter()
