@@ -2,7 +2,7 @@ package com.example.expertcourseunscramblegame
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.junit.Assert.*
+import com.example.expertcourseunscramblegame.game.GamePage
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -14,7 +14,7 @@ class ScenarioTest {
     @get:Rule
     val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
-    private lateinit var gamePage = GamePage()
+    private lateinit var gamePage: GamePage
 
     @Before
     fun setup() {
@@ -29,10 +29,10 @@ class ScenarioTest {
     fun caseNumber1() {
         gamePage.assertInitialState()
 
-        gamePage.addaddInput(text = "anima")
+        gamePage.addInput(text = "anima")
         gamePage.assertInSufficientState()
 
-        gamePage.addaddInput(text = "l")
+        gamePage.addInput(text = "l")
         gamePage.assertSufficientState()
 
         gamePage.clickCheck()
