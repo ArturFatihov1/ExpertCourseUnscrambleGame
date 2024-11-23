@@ -10,11 +10,11 @@ import org.hamcrest.Matcher
 
 class GamePage(word: String) {
 
-    private val containerIdMatcher: Matcher<View> = withParent(withId(R.id.RootLayout))
+    private val containerIdMatcher: Matcher<View> = withParent(withId(R.id.rootLayout))
     private val containerTypeMatcher: Matcher<View> =
         withParent(isAssignableFrom(LinearLayout::class.java))
 
-    private val shuffledShuffledWordUiUi = ShuffledWordUi(
+    private val shuffledShuffledWordUi = ShuffledWordUi(
         text = word,
         containerIdMatcher = containerIdMatcher,
         containerTypeMatcher = containerTypeMatcher
@@ -44,7 +44,7 @@ class GamePage(word: String) {
     )
 
     fun assertInitialState() {
-        shuffledShuffledWordUiUi.assertTextVisible()
+        shuffledShuffledWordUi.assertTextVisible()
         inputUi.assertInitialState()
         skipUi.assertVisible()
         checkUi.assertVisibleDisabled()
@@ -56,7 +56,7 @@ class GamePage(word: String) {
     }
 
     fun assertInSufficientState() {
-        shuffledShuffledWordUiUi.assertTextVisible()
+        shuffledShuffledWordUi.assertTextVisible()
         inputUi.assertInSufficientState()
         skipUi.assertVisible()
         checkUi.assertVisibleDisabled()
@@ -64,7 +64,7 @@ class GamePage(word: String) {
     }
 
     fun assertSufficientState() {
-        shuffledShuffledWordUiUi.assertTextVisible()
+        shuffledShuffledWordUi.assertTextVisible()
         inputUi.assertSufficientState()
         skipUi.assertVisible()
         checkUi.assertVisibleEnabled()
@@ -76,7 +76,7 @@ class GamePage(word: String) {
     }
 
     fun assertCorrectState() {
-        shuffledShuffledWordUiUi.assertTextVisible()
+        shuffledShuffledWordUi.assertTextVisible()
         inputUi.assertCorrectState()
         skipUi.assertNotVisible()
         checkUi.assertNotVisible()
@@ -92,7 +92,7 @@ class GamePage(word: String) {
     }
 
     fun assertIncorrectState() {
-        shuffledShuffledWordUiUi.assertTextVisible()
+        shuffledShuffledWordUi.assertTextVisible()
         inputUi.assertIncorrectState()
         skipUi.assertVisible()
         checkUi.assertVisibleDisabled()
