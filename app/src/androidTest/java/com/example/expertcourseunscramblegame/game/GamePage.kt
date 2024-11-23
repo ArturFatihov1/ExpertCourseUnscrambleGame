@@ -5,6 +5,7 @@ import android.widget.LinearLayout
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withParent
+import com.example.expertcourseunscramblegame.R
 import org.hamcrest.Matcher
 
 class GamePage(word: String) {
@@ -13,8 +14,8 @@ class GamePage(word: String) {
     private val containerTypeMatcher: Matcher<View> =
         withParent(isAssignableFrom(LinearLayout::class.java))
 
-    private val shuffledWordUi = Word(
-        word = word,
+    private val shuffledShuffledWordUiUi = ShuffledWordUi(
+        text = word,
         containerIdMatcher = containerIdMatcher,
         containerTypeMatcher = containerTypeMatcher
     )
@@ -43,7 +44,7 @@ class GamePage(word: String) {
     )
 
     fun assertInitialState() {
-        shuffledWordUi.assertTextVisible()
+        shuffledShuffledWordUiUi.assertTextVisible()
         inputUi.assertInitialState()
         skipUi.assertVisible()
         checkUi.assertVisibleDisabled()
@@ -55,7 +56,7 @@ class GamePage(word: String) {
     }
 
     fun assertInSufficientState() {
-        shuffledWordUi.assertTextVisible()
+        shuffledShuffledWordUiUi.assertTextVisible()
         inputUi.assertInSufficientState()
         skipUi.assertVisible()
         checkUi.assertVisibleDisabled()
@@ -63,7 +64,7 @@ class GamePage(word: String) {
     }
 
     fun assertSufficientState() {
-        shuffledWordUi.assertTextVisible()
+        shuffledShuffledWordUiUi.assertTextVisible()
         inputUi.assertSufficientState()
         skipUi.assertVisible()
         checkUi.assertVisibleEnabled()
@@ -75,9 +76,9 @@ class GamePage(word: String) {
     }
 
     fun assertCorrectState() {
-        shuffledWordUi.assertTextVisible()
+        shuffledShuffledWordUiUi.assertTextVisible()
         inputUi.assertCorrectState()
-        skipUi.assertNoVisible()
+        skipUi.assertNotVisible()
         checkUi.assertNotVisible()
         nextUi.assertNotVisible()
     }
@@ -91,7 +92,7 @@ class GamePage(word: String) {
     }
 
     fun assertIncorrectState() {
-        shuffledWordUi.assertTextVisible()
+        shuffledShuffledWordUiUi.assertTextVisible()
         inputUi.assertIncorrectState()
         skipUi.assertVisible()
         checkUi.assertVisibleDisabled()
