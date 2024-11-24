@@ -40,7 +40,7 @@ class InputUi(
     private val inputInteraction: ViewInteraction = onView(
         allOf(
             isAssignableFrom(TextInputEditText::class.java),
-            withId(R.id.inputText),
+            withId(R.id.inputEditText),
             withParent(withId(inputLayoutId)),
             withParent(isAssignableFrom(TextInputLayout::class.java))
         )
