@@ -26,7 +26,7 @@ class GamePage(word: String) {
 
     private val skipUi = ButtonUi(
         id = R.id.skipButton,
-        colorHex = "#5367B7",
+        colorHex = "#5AFFF5",
         textResId = R.string.skip,
         containerIdMatcher = containerIdMatcher,
         containerTypeMatcher = containerTypeMatcher

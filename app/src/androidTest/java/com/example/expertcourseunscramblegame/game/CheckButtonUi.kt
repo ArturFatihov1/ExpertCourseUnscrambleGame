@@ -24,7 +24,7 @@ class CheckButtonUi(
             containerIdMatcher,
             containerTypeMatcher,
             withId(R.id.checkButton),
-            withText(R.string.checkText),
+            withText(R.string.check),
             isAssignableFrom(AppCompatButton::class.java),
             ButtonColorMatcher("#5367B7")
         )
