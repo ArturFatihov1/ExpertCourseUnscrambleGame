@@ -2,6 +2,7 @@ package com.example.expertcourseunscramblegame.game
 
 import android.view.View
 import androidx.appcompat.widget.AppCompatButton
+
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
@@ -41,5 +42,4 @@ class CheckButtonUi(
             .check(matches(isDisplayed()))
             .check(matches(isEnabled()))
     }
-
 }

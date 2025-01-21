@@ -14,7 +14,7 @@ class GamePage(word: String) {
     private val containerTypeMatcher: Matcher<View> =
         withParent(isAssignableFrom(LinearLayout::class.java))
 
-    private val shuffledShuffledWordUi = ShuffledWordUi(
+    private val shuffledWordUi = ShuffledWordUi(
         text = word,
         containerIdMatcher = containerIdMatcher,
         containerTypeMatcher = containerTypeMatcher
@@ -44,7 +44,7 @@ class GamePage(word: String) {
     )
 
     fun assertInitialState() {
-        shuffledShuffledWordUi.assertTextVisible()
+        shuffledWordUi.assertTextVisible()
         inputUi.assertInitialState()
         skipUi.assertVisible()
         checkUi.assertVisibleDisabled()
@@ -56,7 +56,7 @@ class GamePage(word: String) {
     }
 
     fun assertInSufficientState() {
-        shuffledShuffledWordUi.assertTextVisible()
+        shuffledWordUi.assertTextVisible()
         inputUi.assertInSufficientState()
         skipUi.assertVisible()
         checkUi.assertVisibleDisabled()
@@ -64,7 +64,7 @@ class GamePage(word: String) {
     }
 
     fun assertSufficientState() {
-        shuffledShuffledWordUi.assertTextVisible()
+        shuffledWordUi.assertTextVisible()
         inputUi.assertSufficientState()
         skipUi.assertVisible()
         checkUi.assertVisibleEnabled()
@@ -76,7 +76,7 @@ class GamePage(word: String) {
     }
 
     fun assertCorrectState() {
-        shuffledShuffledWordUi.assertTextVisible()
+        shuffledWordUi.assertTextVisible()
         inputUi.assertCorrectState()
         skipUi.assertNotVisible()
         checkUi.assertNotVisible()
@@ -92,7 +92,7 @@ class GamePage(word: String) {
     }
 
     fun assertIncorrectState() {
-        shuffledShuffledWordUi.assertTextVisible()
+        shuffledWordUi.assertTextVisible()
         inputUi.assertIncorrectState()
         skipUi.assertVisible()
         checkUi.assertVisibleDisabled()
