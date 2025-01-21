@@ -41,8 +41,6 @@ class ScenarioTest {
         gamePage.clickNext()
         gamePage = GamePage(word = "auto".reversed())
         gamePage.assertInitialState()
-
-
     }
 
     /**
