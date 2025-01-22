@@ -23,15 +23,15 @@ class GameViewModelTest {
         var expected: GameUiState = GameUiState.Initial(shuffledWord = "f1")
         assertEquals(expected, actual)
 
-        actual = viewModel.handleUserInput(text = "f")
+        actual = viewModel.handleUserInput(text = "1")
         expected = GameUiState.Insufficient(shuffledWord = "f1")
         assertEquals(expected, actual)
 
-        actual = viewModel.handleUserInput(text = "f1")
+        actual = viewModel.handleUserInput(text = "1f")
         expected = GameUiState.Sufficient(shuffledWord = "f1")
         assertEquals(expected, actual)
 
-        actual = viewModel.check(text = "f1")
+        actual = viewModel.check(text = "1f")
         expected = GameUiState.Correct(shuffledWord = "f1")
         assertEquals(expected, actual)
 
@@ -54,7 +54,7 @@ class GameViewModelTest {
         expected = GameUiState.Initial(shuffledWord = "f2")
         assertEquals(expected, actual)
 
-        actual = viewModel.handleUserInput(text = "f")
+        actual = viewModel.handleUserInput(text = "1")
         expected = GameUiState.Insufficient(shuffledWord = "f2")
         assertEquals(expected, actual)
         actual = viewModel.skip()
@@ -107,4 +107,17 @@ class GameViewModelTest {
 
 private class FakeRepository : GameRepository {
 
+    private var originalList = listOf("1f", "2f", "3f", "4f", "5f", "6f")
+    private var shuffledList = originalList.map { it.reversed() }
+    private var index = 0
+
+    override fun shuffledWord(): String = shuffledList[index]
+
+    override fun originalWord(): String = originalList[index]
+
+    override fun next() {
+        index++
+        if (index == originalList.size)
+            index = 0
+    }
 }
