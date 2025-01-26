@@ -20,7 +20,20 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val viewModel: GameViewModel = GameViewModel()
+        val viewModel: GameViewModel = GameViewModel(object : GameRepository {
+            override fun shuffledWord(): String {
+                TODO("Not yet implemented")
+            }
+
+            override fun originalWord(): String {
+                TODO("Not yet implemented")
+            }
+
+            override fun next() {
+                TODO("Not yet implemented")
+            }
+
+        })
 
         binding.skipButton.setOnClickListener {
             val uiState: GameUiState = viewModel.skip()
