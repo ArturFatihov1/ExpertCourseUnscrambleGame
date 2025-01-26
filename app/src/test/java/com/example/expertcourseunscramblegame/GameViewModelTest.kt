@@ -1,6 +1,6 @@
 package com.example.expertcourseunscramblegame
 
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
@@ -91,7 +91,7 @@ class GameViewModelTest {
         expected = GameUiState.Sufficient(shuffledWord = "f5")
         assertEquals(expected, actual)
         actual = viewModel.check(text = "f1")
-        expected = GameUiState.Incorrect(shuffledWord = "f4")
+        expected = GameUiState.Incorrect(shuffledWord = "f5")
         assertEquals(expected, actual)
         actual = viewModel.handleUserInput(text = "f")
         expected = GameUiState.Insufficient(shuffledWord = "f5")
