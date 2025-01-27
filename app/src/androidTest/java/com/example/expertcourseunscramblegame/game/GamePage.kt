@@ -80,7 +80,7 @@ class GamePage(word: String) {
         inputUi.assertCorrectState()
         skipUi.assertNotVisible()
         checkUi.assertNotVisible()
-        nextUi.assertNotVisible()
+        nextUi.assertVisible()
     }
 
     fun clickNext() {

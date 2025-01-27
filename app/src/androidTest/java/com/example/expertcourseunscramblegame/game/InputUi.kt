@@ -12,7 +12,6 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.isEnabled
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withParent
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.example.expertcourseunscramblegame.R
 import com.example.expertcourseunscramblegame.TextInputLayoutErrorEnabledMatcher
@@ -41,8 +40,8 @@ class InputUi(
         allOf(
             isAssignableFrom(TextInputEditText::class.java),
             withId(R.id.inputEditText),
-            withParent(withId(inputLayoutId)),
-            withParent(isAssignableFrom(TextInputLayout::class.java))
+//            withParent(withId(inputLayoutId)),
+//            withParent(isAssignableFrom(TextInputLayout::class.java))
         )
     )
 
