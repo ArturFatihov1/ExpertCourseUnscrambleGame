@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val viewModel: GameViewModel = GameViewModel(GameRepository.Base(ShuffleStrategy.Reverse()))
+        val viewModel: GameViewModel = GameViewModel(GameRepository.Base())
 
         binding.skipButton.setOnClickListener {
             val uiState: GameUiState = viewModel.skip()
