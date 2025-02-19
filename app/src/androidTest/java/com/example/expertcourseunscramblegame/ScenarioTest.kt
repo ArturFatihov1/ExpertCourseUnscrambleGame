@@ -59,6 +59,9 @@ class ScenarioTest {
 
     @Test
     fun caseNumber2() {
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertInitialState()
+        activityScenarioRule.scenario.recreate()
         gamePage.assertInitialState()
 
         gamePage.clickSkip()
