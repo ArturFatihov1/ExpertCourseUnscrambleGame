@@ -23,8 +23,7 @@ interface GameRepository {
             "camera",
             "camping"
         )
-    ) :
-        GameRepository {
+    ) : GameRepository {
 
         private var shuffledList = originalList.map { shuffleStrategy.shuffle(it) }
 

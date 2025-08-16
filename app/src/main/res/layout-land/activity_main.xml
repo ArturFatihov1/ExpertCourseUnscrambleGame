@@ -14,7 +14,7 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
+        <com.example.expertcourseunscramblegame.views.shuffledword.ShuffledWordTextView
             android:id="@+id/shuffledWordTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,18 +24,10 @@
             tools:text="Shuffled word" />
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputLayout"
+        <com.example.expertcourseunscramblegame.views.input.InputView
+            android:id="@+id/inputView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputEditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="16dp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -46,7 +38,7 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.example.expertcourseunscramblegame.views.visibilitybutton.VisibilityButton
             android:id="@+id/skipButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,7 +46,7 @@
             android:background="@color/blue"
             android:text="@string/skip" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.example.expertcourseunscramblegame.views.check.CheckButton
             android:id="@+id/checkButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,7 +55,7 @@
             android:background="@color/darkBlue"
             android:text="@string/check" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.example.expertcourseunscramblegame.views.visibilitybutton.VisibilityButton
             android:id="@+id/nextButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
