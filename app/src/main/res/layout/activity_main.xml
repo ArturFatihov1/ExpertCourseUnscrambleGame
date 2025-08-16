@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <TextView
+    <com.example.expertcourseunscramblegame.views.shuffledword.ShuffledWordTextView
         android:layout_marginHorizontal="16dp"
         android:id="@+id/shuffledWordTextView"
         android:layout_width="match_parent"
@@ -26,25 +26,17 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputLayout"
+    <com.example.expertcourseunscramblegame.views.input.InputView
+        android:id="@+id/inputView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputEditText"
-            android:layout_marginHorizontal="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_height="wrap_content" />
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.example.expertcourseunscramblegame.views.visibilitybutton.VisibilityButton
         android:id="@+id/skipButton"
         android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"
@@ -52,7 +44,7 @@
         android:background="@color/blue"
         android:text="@string/skip" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.example.expertcourseunscramblegame.views.check.CheckButton
         android:id="@+id/checkButton"
         android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"
@@ -61,7 +53,7 @@
         android:background="@color/darkBlue"
         android:text="@string/check" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.example.expertcourseunscramblegame.views.visibilitybutton.VisibilityButton
         android:id="@+id/nextButton"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"

@@ -1,29 +1,26 @@
 package com.example.expertcourseunscramblegame
 
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
+import com.example.expertcourseunscramblegame.views.input.UpdateInput
 import java.io.Serializable
 
 interface InputUiState : Serializable {
-    fun update(inputLayout: TextInputLayout, inputEditText: TextInputEditText)
+    fun update(updateInput: UpdateInput)
 
     abstract class Abstract(
         private val errorIsVisible: Boolean,
         private val enabled: Boolean,
     ) : InputUiState {
-        override fun update(inputLayout: TextInputLayout, inputEditText: TextInputEditText) {
-            inputLayout.isErrorEnabled = errorIsVisible
-            inputLayout.isEnabled = enabled
-            if (errorIsVisible)
-                inputLayout.error = inputLayout.context.getString(R.string.incorrect_message)
 
+        override fun update(updateInput: UpdateInput) {
+            updateInput.update(errorIsVisible, enabled)
         }
+
     }
 
     data class Initial(private val userInput: String) : Abstract(false, true) {
-        override fun update(inputLayout: TextInputLayout, inputEditText: TextInputEditText) {
-            super.update(inputLayout, inputEditText)
-            inputEditText.setText(userInput)
+        override fun update(updateInput: UpdateInput) {
+            super.update(updateInput)
+            updateInput.update(userInput)
         }
     }
 
