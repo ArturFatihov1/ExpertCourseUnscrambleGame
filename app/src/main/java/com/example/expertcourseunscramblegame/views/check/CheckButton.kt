@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Parcelable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatButton
-import com.example.expertcourseunscramblegame.CheckUiState
+import com.example.expertcourseunscramblegame.game.CheckUiState
 
 class CheckButton : AppCompatButton, UpdateCheckButton {
     private lateinit var state: CheckUiState

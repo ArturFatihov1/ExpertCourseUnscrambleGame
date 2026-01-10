@@ -1,4 +1,4 @@
-package com.example.expertcourseunscramblegame
+package com.example.expertcourseunscramblegame.game
 
 class GameViewModel(private val repository: GameRepository) {
 

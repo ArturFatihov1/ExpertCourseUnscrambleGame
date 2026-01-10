@@ -3,6 +3,7 @@ package com.example.expertcourseunscramblegame
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.expertcourseunscramblegame.game.GamePage
+import com.example.expertcourseunscramblegame.main.MainActivity
 import com.example.expertcourseunscramblegame.stats.StatsPage
 import org.junit.Before
 import org.junit.Rule

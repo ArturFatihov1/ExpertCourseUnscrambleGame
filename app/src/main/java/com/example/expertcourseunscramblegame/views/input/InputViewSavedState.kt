@@ -5,7 +5,7 @@ import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
 import android.view.View
-import com.example.expertcourseunscramblegame.InputUiState
+import com.example.expertcourseunscramblegame.game.InputUiState
 
 
 class InputViewSavedState : View.BaseSavedState {
