@@ -23,7 +23,7 @@ class StatsPage(skips: Int, fails: Int, corrects: Int) {
     )
     private val newGameUi = ButtonUi(
         R.id.newGameButton,
-        "#FF00000",
+        "#000000",
         R.string.new_game,
         containerIdMatcher,
         containerTypeMatcher
