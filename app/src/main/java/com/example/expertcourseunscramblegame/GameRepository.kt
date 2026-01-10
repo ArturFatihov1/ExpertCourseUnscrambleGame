@@ -18,10 +18,6 @@ interface GameRepository {
             "anecdote",
             "alphabet",
             "all",
-            "bench",
-            "birthday",
-            "camera",
-            "camping"
         )
     ) : GameRepository {
 
