@@ -158,4 +158,78 @@ class ScenarioTest {
         activityScenarioRule.scenario.recreate()
         gamePage.assertIncorrectState()
     }
+
+    /**
+     * UGTC-03 (UnscrambleGame - third testcase)
+     */
+
+
+    @Test
+    fun caseNumber3() {
+        activityScenarioRule.scenario.recreate()
+        gamePage.clickSkip()
+        gamePage = GamePage(word = "auto".reversed())
+        gamePage.assertInitialState()
+        activityScenarioRule.scenario.recreate()
+
+        gamePage.addInput("autx")
+        gamePage.assertSufficientState()
+        gamePage.clickCheck()
+        gamePage.assertIncorrectState()
+        activityScenarioRule.scenario.recreate()
+
+        gamePage.removeInputLastLetter()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertInSufficientState()
+        gamePage.addInput("o")
+        gamePage.clickCheck()
+        gamePage.assertCorrectState()
+        activityScenarioRule.scenario.recreate()
+
+        gamePage.clickNext()
+        gamePage = GamePage(word = "anecdote".reversed())
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertInitialState()
+
+        gamePage.addInput("anecdote")
+        gamePage.assertSufficientState()
+        gamePage.clickCheck()
+        gamePage.assertCorrectState()
+        activityScenarioRule.scenario.recreate()
+
+        gamePage.clickNext()
+        gamePage = GamePage(word = "alphabet".reversed())
+        gamePage.assertInitialState()
+        activityScenarioRule.scenario.recreate()
+
+        gamePage.addInput("alphabed")
+        gamePage.assertSufficientState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.clickCheck()
+        gamePage.assertIncorrectState()
+        gamePage.removeInputLastLetter()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertInSufficientState()
+        gamePage.addInput("r")
+        gamePage.clickCheck()
+        gamePage.assertIncorrectState()
+        activityScenarioRule.scenario.recreate()
+
+        gamePage.clickSkip()
+        gamePage = GamePage(word = "all".reversed())
+        gamePage.assertInitialState()
+        activityScenarioRule.scenario.recreate()
+
+        gamePage.clickSkip()
+
+        val statsPage = StatsPage(skip = 3, fails = 3, corrects = 2)
+        activityScenarioRule.scenario.recreate()
+        statsPage.assertInitialState()
+
+        statsPage.clickNewGame()
+
+        setup()
+        gamePage.assertInitialState()
+
+    }
 }
