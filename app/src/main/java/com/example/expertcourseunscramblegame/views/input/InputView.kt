@@ -6,9 +6,9 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
-import com.example.expertcourseunscramblegame.InputUiState
 import com.example.expertcourseunscramblegame.R
 import com.example.expertcourseunscramblegame.databinding.InputBinding
+import com.example.expertcourseunscramblegame.game.InputUiState
 
 class InputView : FrameLayout, UpdateInput {
     private lateinit var state: InputUiState

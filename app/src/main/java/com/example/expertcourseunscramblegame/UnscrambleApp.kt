@@ -2,6 +2,11 @@ package com.example.expertcourseunscramblegame
 
 import android.app.Application
 import android.content.Context
+import com.example.expertcourseunscramblegame.game.GameRepository
+import com.example.expertcourseunscramblegame.game.GameViewModel
+import com.example.expertcourseunscramblegame.game.IntCashes
+import com.example.expertcourseunscramblegame.game.ShuffleStrategy
+import com.example.expertcourseunscramblegame.game.StringCache
 
 class UnscrambleApp : Application() {
 
