@@ -3,6 +3,7 @@ package com.example.expertcourseunscramblegame
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.expertcourseunscramblegame.game.GamePage
+import com.example.expertcourseunscramblegame.stats.StatsPage
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -222,7 +223,7 @@ class ScenarioTest {
 
         gamePage.clickSkip()
 
-        val statsPage = StatsPage(skip = 3, fails = 3, corrects = 2)
+        val statsPage = StatsPage(skips = 3, fails = 3, corrects = 2)
         activityScenarioRule.scenario.recreate()
         statsPage.assertInitialState()
 
