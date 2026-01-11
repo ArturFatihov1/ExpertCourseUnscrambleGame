@@ -1,5 +1,6 @@
 package com.example.expertcourseunscramblegame.game
 
+import com.example.expertcourseunscramblegame.stats.NavigateToStats
 import com.example.expertcourseunscramblegame.views.check.UpdateCheckButton
 import com.example.expertcourseunscramblegame.views.input.UpdateInput
 import com.example.expertcourseunscramblegame.views.shuffledword.UpdateText
@@ -14,17 +15,11 @@ interface GameUiState {
         skip: UpdateVisibility,
         check: UpdateCheckButton,
         next: UpdateVisibility
-    )
+    ) = Unit
 
-    object Empty : GameUiState {
-        override fun update(
-            shuffledWordTextView: UpdateText,
-            inputView: UpdateInput,
-            skip: UpdateVisibility,
-            check: UpdateCheckButton,
-            next: UpdateVisibility
-        ) = Unit
-    }
+    fun navigate(navigateToStats: NavigateToStats) = Unit
+
+    object Empty : GameUiState
 
     abstract class Abstract(
         private val inputUiState: InputUiState,

@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity(), Navigation {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        if (savedInstanceState == null)
+            navigateToGame()
     }
 
     override fun navigate(screen: Screen) {
