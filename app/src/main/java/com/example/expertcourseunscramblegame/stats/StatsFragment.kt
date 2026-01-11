@@ -9,6 +9,7 @@ import com.example.expertcourseunscramblegame.UnscrambleApp
 import com.example.expertcourseunscramblegame.databinding.FragmentStatsBinding
 import com.example.expertcourseunscramblegame.game.NavigateToGame
 import com.example.expertcourseunscramblegame.views.stats.StatsUiState
+import com.example.expertcourseunscramblegame.views.stats.StatsViewModel
 
 class StatsFragment : Fragment() {
 

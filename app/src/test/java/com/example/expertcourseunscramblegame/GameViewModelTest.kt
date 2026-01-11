@@ -108,7 +108,7 @@ class GameViewModelTest {
     }
 
     @Test
-    fun testLastWord() {
+    fun testLastWordNext() {
         viewModel = GameViewModel(repository = FakeRepository(listOf("one", "two")))
 
         var actual: GameUiState = viewModel.init(isFirstRun = true)
@@ -136,6 +136,31 @@ class GameViewModelTest {
         assertEquals(expected, actual)
 
         actual = viewModel.next()
+        expected = GameUiState.Finish
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun testLastWordSkip() {
+        viewModel = GameViewModel(repository = FakeRepository(listOf("one", "two")))
+
+        var actual: GameUiState = viewModel.init(isFirstRun = true)
+        var expected: GameUiState = GameUiState.Initial(shuffledWord = "one".reversed())
+        assertEquals(expected, actual)
+
+        actual = viewModel.handleUserInput(text = "one")
+        expected = GameUiState.Sufficient
+        assertEquals(expected, actual)
+
+        actual = viewModel.check(text = "one")
+        expected = GameUiState.Correct
+        assertEquals(expected, actual)
+
+        actual = viewModel.next()
+        expected = GameUiState.Initial(shuffledWord = "two".reversed())
+        assertEquals(expected, actual)
+
+        actual = viewModel.skip()
         expected = GameUiState.Finish
         assertEquals(expected, actual)
     }

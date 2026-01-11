@@ -7,6 +7,7 @@ import com.example.expertcourseunscramblegame.game.GameViewModel
 import com.example.expertcourseunscramblegame.game.IntCashes
 import com.example.expertcourseunscramblegame.game.ShuffleStrategy
 import com.example.expertcourseunscramblegame.game.StringCache
+import com.example.expertcourseunscramblegame.views.stats.StatsViewModel
 
 class UnscrambleApp : Application() {
 
