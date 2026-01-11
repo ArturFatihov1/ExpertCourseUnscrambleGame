@@ -1,4 +1,6 @@
-package com.example.expertcourseunscramblegame.views.stats
+package com.example.expertcourseunscramblegame.stats
+
+import com.example.expertcourseunscramblegame.views.stats.StatsUiState
 
 class StatsViewModel(private val repository: StatsRepository) {
 

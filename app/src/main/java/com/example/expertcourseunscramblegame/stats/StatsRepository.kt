@@ -1,4 +1,4 @@
-package com.example.expertcourseunscramblegame.views.stats
+package com.example.expertcourseunscramblegame.stats
 
 interface StatsRepository {
 
