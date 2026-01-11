@@ -1,15 +1,20 @@
 package com.example.expertcourseunscramblegame.game
 
+import com.example.expertcourseunscramblegame.stats.StatsCache
+
 interface GameRepository {
 
     fun shuffledWord(): String
-    fun originalWord(): String
+    fun isCorrect(text: String): Boolean
     fun next()
+    fun skip()
     fun saveUserInput(value: String)
     fun userInput(): String
+    fun isLastWord(): Boolean
 
     class Base(
-        private val index: IntCashes,
+        private val statsCache: StatsCache.Game,
+        private val index: IntCache,
         private val userInput: StringCache,
         private val shuffleStrategy: ShuffleStrategy = ShuffleStrategy.Base(),
         private val originalList: List<String> = listOf(
@@ -24,13 +29,24 @@ interface GameRepository {
         private var shuffledList = originalList.map { shuffleStrategy.shuffle(it) }
 
         override fun shuffledWord(): String = shuffledList[index.read()]
+        override fun isCorrect(text: String): Boolean {
+            val isCorrect = originalList[index.read()].equals(text, ignoreCase = true)
+            if (isCorrect)
+                statsCache.incrementCorrects()
+            else
+                statsCache.incrementFails()
+            return isCorrect
 
-        override fun originalWord(): String = originalList[index.read()]
+        }
 
         override fun next() {
-            val value = index.read()
-            index.save(if (value + 1 == originalList.size) 0 else value + 1)
+            index.save(index.read() + 1)
             userInput.save("")
+        }
+
+        override fun skip() {
+            statsCache.incrementSkips()
+            next()
         }
 
         override fun saveUserInput(value: String) {
@@ -41,6 +57,12 @@ interface GameRepository {
             return userInput.read()
         }
 
+        override fun isLastWord(): Boolean {
+            val lastWord = index.read() == originalList.size
+            if (lastWord)
+                index.save(0)
+            return lastWord
+        }
     }
 }
 

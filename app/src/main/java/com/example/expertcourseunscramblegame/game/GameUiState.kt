@@ -90,6 +90,11 @@ interface GameUiState {
         InputUiState.Incorrect,
         CheckUiState.Disabled,
     )
+
+    object Finish : GameUiState {
+        override fun navigate(navigateToStats: NavigateToStats) = navigateToStats.navigateToStats()
+    }
+
 }
 
 

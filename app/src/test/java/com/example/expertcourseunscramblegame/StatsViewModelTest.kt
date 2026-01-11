@@ -1,5 +1,7 @@
 package com.example.expertcourseunscramblegame
 
+import com.example.expertcourseunscramblegame.stats.StatsRepository
+import com.example.expertcourseunscramblegame.stats.StatsViewModel
 import com.example.expertcourseunscramblegame.views.stats.StatsUiState
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -14,12 +16,11 @@ class StatsViewModelTest {
         var actualUiState: StatsUiState = viewModel.init(isFirstRun = true)
 
         assertEquals(StatsUiState.Base(1, 2, 3), actualUiState)
-        actualUiState = StatsUiState.Empty
+        repository.assertClearCalled()
 
+        actualUiState = StatsUiState.Empty
         assertEquals(StatsUiState.Empty, actualUiState)
 
-        viewModel.clear()
-        repository.assertClearCalled()
     }
 }
 
