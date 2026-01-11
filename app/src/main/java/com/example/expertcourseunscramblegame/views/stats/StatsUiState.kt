@@ -3,9 +3,10 @@ package com.example.expertcourseunscramblegame.views.stats
 import java.io.Serializable
 
 interface StatsUiState : Serializable {
-    abstract fun show(statsTextView: UpdateStats)
 
-    class Base(
+    fun show(statsTextView: UpdateStats)
+
+    data class Base(
         private val skips: Int,
         private val corrects: Int,
         private val fails: Int
@@ -15,7 +16,7 @@ interface StatsUiState : Serializable {
         }
     }
 
-    class Empty : StatsUiState {
+    object Empty : StatsUiState {
         override fun show(statsTextView: UpdateStats) = Unit
 
     }
