@@ -3,7 +3,7 @@ package com.example.expertcourseunscramblegame.game
 class GameViewModel(private val repository: GameRepository) {
 
     fun skip(): GameUiState {
-        repository.next()
+        repository.skip()
         return init()
     }
 
@@ -13,9 +13,7 @@ class GameViewModel(private val repository: GameRepository) {
     }
 
     fun check(text: String): GameUiState {
-        val originalWord = repository.originalWord()
-        val isCorrect = originalWord.equals(text, ignoreCase = true)
-        return if (isCorrect)
+        return if (repository.isCorrect(text))
             GameUiState.Correct
         else
             GameUiState.Incorrect

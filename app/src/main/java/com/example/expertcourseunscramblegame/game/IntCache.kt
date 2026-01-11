@@ -2,7 +2,7 @@ package com.example.expertcourseunscramblegame.game
 
 import android.content.SharedPreferences
 
-interface IntCashes {
+interface IntCache {
     fun read(): Int
     fun save(newValue: Int)
 
@@ -10,7 +10,7 @@ interface IntCashes {
         private val sharedPreferences: SharedPreferences,
         private val key: String,
         private val defaultValue: Int
-    ) : IntCashes {
+    ) : IntCache {
         override fun read(): Int {
             return sharedPreferences.getInt(key, defaultValue)
         }
