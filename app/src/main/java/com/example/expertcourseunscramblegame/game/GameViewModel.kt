@@ -1,6 +1,12 @@
 package com.example.expertcourseunscramblegame.game
 
-class GameViewModel(private val repository: GameRepository) {
+import com.example.expertcourseunscramblegame.di.ClearViewModel
+import com.example.expertcourseunscramblegame.di.MyViewModel
+
+class GameViewModel(
+    private val repository: GameRepository,
+    private val clearViewModel: ClearViewModel
+) : MyViewModel {
 
     fun skip(): GameUiState {
         repository.skip()
@@ -32,9 +38,10 @@ class GameViewModel(private val repository: GameRepository) {
 
     fun init(isFirstRun: Boolean = true): GameUiState {
         return if (isFirstRun) {
-            if (repository.isLastWord())
+            if (repository.isLastWord()) {
+                clearViewModel.clear(GameViewModel::class.java)
                 GameUiState.Finish
-            else {
+            } else {
                 val shuffledWord = repository.shuffledWord()
                 GameUiState.Initial(shuffledWord, repository.userInput())
             }
