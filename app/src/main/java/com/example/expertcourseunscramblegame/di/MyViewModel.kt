@@ -1,0 +1,3 @@
+package com.example.expertcourseunscramblegame.di
+
+interface MyViewModel
