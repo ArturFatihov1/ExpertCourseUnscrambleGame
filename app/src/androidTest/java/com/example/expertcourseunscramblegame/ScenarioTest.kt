@@ -3,6 +3,7 @@ package com.example.expertcourseunscramblegame
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.expertcourseunscramblegame.game.GamePage
+import com.example.expertcourseunscramblegame.load.LoadPage
 import com.example.expertcourseunscramblegame.main.MainActivity
 import com.example.expertcourseunscramblegame.stats.StatsPage
 import org.junit.Before
@@ -234,4 +235,34 @@ class ScenarioTest {
         gamePage.assertInitialState()
 
     }
+
+    @Test
+    fun caseNumber4() {
+        val loadPage = LoadPage()
+
+        loadPage.assertProgressState()
+        activityScenarioRule.scenario.recreate()
+        loadPage.assertProgressState()
+
+        loadPage.waitTillError()
+
+        loadPage.assertErrorState()
+        activityScenarioRule.scenario.recreate()
+        loadPage.assertErrorState()
+
+        loadPage.clickRetry()
+
+        loadPage.assertProgressState()
+        activityScenarioRule.scenario.recreate()
+        loadPage.assertProgressState()
+
+        loadPage.waitTillGone()
+
+        gamePage.assertInitialState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertInitialState()
+
+
+    }
+
 }
