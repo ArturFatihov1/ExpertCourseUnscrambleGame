@@ -19,7 +19,7 @@ class ErrorUi(
     onView(
         allOf(
             withId(viewId),
-            withText(R.id.no_internet_connection),
+            withText(R.string.no_internet_connection),
             isAssignableFrom(TextView::class.java),
             containerIdMatcher,
             classTypeMatcher
