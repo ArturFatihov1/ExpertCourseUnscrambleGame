@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.expertcourseunscramblegame.databinding.FragmentLoadBinding
 import com.example.expertcourseunscramblegame.di.ProvideViewModel
+import com.example.expertcourseunscramblegame.game.NavigateToGame
 
-class LoadFragment : Fragment() {
+class LoadFragment : AbstractFragment<LoadUiState, LoadViewModel>() {
     private var _binding: FragmentLoadBinding? = null
     private val binding get() = _binding!!
 
@@ -21,15 +21,15 @@ class LoadFragment : Fragment() {
         return binding.root
     }
 
-    private val update: (LoadUiState) -> Unit = { uiState ->
+    override val update: (LoadUiState) -> Unit = { uiState ->
         uiState.show(
             binding.errorTextView,
             binding.retryButton,
             binding.progressBar
         )
+        uiState.navigate((requireActivity() as NavigateToGame))
     }
 
-    private lateinit var viewModel: LoadViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,18 +44,9 @@ class LoadFragment : Fragment() {
         viewModel.load(isFirstRun = savedInstanceState == null)
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.startUpdates(observer = update)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        viewModel.stopUpdates()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 }

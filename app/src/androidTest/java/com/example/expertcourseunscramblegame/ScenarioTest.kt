@@ -30,9 +30,7 @@ class ScenarioTest {
 
     @Test
     fun caseNumber1() {
-        gamePage.assertInitialState()
-        activityScenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
+        caseNumber4()
 
         gamePage.addInput(text = "anima")
         gamePage.assertInSufficientState()
@@ -62,10 +60,7 @@ class ScenarioTest {
 
     @Test
     fun caseNumber2() {
-        activityScenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
-        activityScenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
+        caseNumber4()
 
         gamePage.clickSkip()
         gamePage = GamePage(word = "auto".reversed())
@@ -169,10 +164,10 @@ class ScenarioTest {
 
     @Test
     fun caseNumber3() {
-        activityScenarioRule.scenario.recreate()
+        caseNumber4()
         gamePage.clickSkip()
+
         gamePage = GamePage(word = "auto".reversed())
-        gamePage.assertInitialState()
         activityScenarioRule.scenario.recreate()
 
         gamePage.addInput("autx")
