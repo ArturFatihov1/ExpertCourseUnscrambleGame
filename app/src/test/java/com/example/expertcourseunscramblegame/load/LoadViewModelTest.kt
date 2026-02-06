@@ -1,6 +1,11 @@
 package com.example.expertcourseunscramblegame.load
 
 import com.example.expertcourseunscramblegame.game.FakeClearViewModel
+import com.example.expertcourseunscramblegame.load.data.LoadRepository
+import com.example.expertcourseunscramblegame.load.data.NoInternetConnectionException
+import com.example.expertcourseunscramblegame.load.presentation.LoadUiObservable
+import com.example.expertcourseunscramblegame.load.presentation.LoadUiState
+import com.example.expertcourseunscramblegame.load.presentation.LoadViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -34,7 +39,6 @@ class LoadViewModelTest {
 
     @Test
     fun sameFragment() {
-        repository.expectResult(LoadResult.Success)
 
         viewModel.load(isFirstRun = true) // onViewCreated first time
         assertEquals(LoadUiState.Progress, observable.postUiStateCalledList.first())
@@ -62,7 +66,7 @@ class LoadViewModelTest {
 
     @Test
     fun recreateActivity() {
-        repository.expectResult(LoadResult.Error(message = "no internet"))
+        repository.expectFailure()
 
         viewModel.load(isFirstRun = true) //onViewCreated
         assertEquals(LoadUiState.Progress, observable.postUiStateCalledList.first())
@@ -81,7 +85,7 @@ class LoadViewModelTest {
         runAsync.returnResult()
         assertEquals(1, fragment.statesList.size)
         assertEquals(
-            LoadUiState.Error(message = "no internet"),
+            LoadUiState.ErrorRes(),
             observable.postUiStateCalledList[1]
         )
         assertEquals(2, observable.postUiStateCalledList.size)
@@ -96,7 +100,7 @@ class LoadViewModelTest {
         assertEquals(2, observable.registerCalledCount)
 
         assertEquals(
-            LoadUiState.Error(message = "no internet"),
+            LoadUiState.ErrorRes(),
             newInstanceFragment.statesList.first()
         )
         assertEquals(1, newInstanceFragment.statesList.size)
@@ -113,16 +117,19 @@ private class FakeFragment : (LoadUiState) -> Unit {
 
 private class FakeLoadRepository : LoadRepository {
 
-    private var loadResult: LoadResult? = null
-
-    fun expectResult(loadResult: LoadResult) {
-        this.loadResult = loadResult
-    }
-
     var loadCalledCount = 0
+
+    private var exception: Exception? = null
+
+    fun expectFailure() {
+        exception = NoInternetConnectionException()
+    }
 
     override suspend fun load() {
         loadCalledCount++
+        exception?.let {
+            throw it
+        }
     }
 }
 
