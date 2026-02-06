@@ -1,4 +1,4 @@
-package com.example.expertcourseunscramblegame.load
+package com.example.expertcourseunscramblegame.load.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.example.expertcourseunscramblegame.databinding.FragmentLoadBinding
 import com.example.expertcourseunscramblegame.di.ProvideViewModel
 import com.example.expertcourseunscramblegame.game.NavigateToGame
+import com.example.expertcourseunscramblegame.load.AbstractFragment
 
 class LoadFragment : AbstractFragment<LoadUiState, LoadViewModel>() {
     private var _binding: FragmentLoadBinding? = null

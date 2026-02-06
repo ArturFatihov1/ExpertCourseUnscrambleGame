@@ -2,6 +2,7 @@ package com.example.expertcourseunscramblegame.game
 
 import com.example.expertcourseunscramblegame.di.ClearViewModel
 import com.example.expertcourseunscramblegame.di.MyViewModel
+import org.junit.Assert.assertEquals
 
 class FakeClearViewModel : ClearViewModel {
 
@@ -9,6 +10,10 @@ class FakeClearViewModel : ClearViewModel {
 
     override fun clear(viewModelClass: Class<out MyViewModel>) {
         clasz = viewModelClass
+    }
+
+    fun assertClearCalled(expected: Class<out MyViewModel>) {
+        assertEquals(expected, clasz)
     }
 }
 

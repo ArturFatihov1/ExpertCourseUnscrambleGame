@@ -33,26 +33,34 @@ class ErrorView : androidx.appcompat.widget.AppCompatTextView, UpdateError {
     }
 
     override fun update(uiState: ErrorUiState) {
-        this.state = uiState
-        this.state.update(this)
+        state = uiState
+        state.update(this)
     }
 
     override fun updateText(textResId: Int) {
         setText(textResId)
     }
 
+    override fun updateText(text: String) {
+        setText(text)
+    }
+
     override fun updateVisibility(visibility: Int) {
         this.visibility = visibility
     }
+
+
 }
 
 interface UpdateError {
     fun update(uiState: ErrorUiState)
     fun updateText(textResId: Int)
+    fun updateText(text: String)
     fun updateVisibility(visibility: Int)
 }
 
 interface ErrorUiState : Serializable {
+
     fun update(updateError: UpdateError)
 
     abstract class Abstract(private val visibility: Int) : ErrorUiState {
@@ -63,11 +71,19 @@ interface ErrorUiState : Serializable {
 
     object Hide : Abstract(View.GONE)
 
-    data class Show(private val resId: Int) : Abstract(View.VISIBLE) {
+    data class ShowRes(private val resId: Int) : Abstract(View.VISIBLE) {
         override fun update(updateError: UpdateError) {
             super.update(updateError)
             updateError.updateText(resId)
         }
     }
 
+    data class Show(private val message: String) : Abstract(View.VISIBLE) {
+
+        override fun update(updateError: UpdateError) {
+            super.update(updateError)
+            updateError.updateText(message)
+        }
+    }
 }
+
