@@ -1,4 +1,4 @@
-package com.example.expertcourseunscramblegame
+package com.example.expertcourseunscramblegame.game
 
 import com.example.expertcourseunscramblegame.di.ClearViewModel
 import com.example.expertcourseunscramblegame.di.MyViewModel

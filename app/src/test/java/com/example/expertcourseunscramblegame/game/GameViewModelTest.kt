@@ -1,8 +1,5 @@
-package com.example.expertcourseunscramblegame
+package com.example.expertcourseunscramblegame.game
 
-import com.example.expertcourseunscramblegame.game.GameRepository
-import com.example.expertcourseunscramblegame.game.GameUiState
-import com.example.expertcourseunscramblegame.game.GameViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

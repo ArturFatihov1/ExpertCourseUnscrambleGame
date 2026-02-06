@@ -1,7 +1,6 @@
-package com.example.expertcourseunscramblegame
+package com.example.expertcourseunscramblegame.stats
 
-import com.example.expertcourseunscramblegame.stats.StatsRepository
-import com.example.expertcourseunscramblegame.stats.StatsViewModel
+import com.example.expertcourseunscramblegame.game.FakeClearViewModel
 import com.example.expertcourseunscramblegame.views.stats.StatsUiState
 import org.junit.Assert.assertEquals
 import org.junit.Test
