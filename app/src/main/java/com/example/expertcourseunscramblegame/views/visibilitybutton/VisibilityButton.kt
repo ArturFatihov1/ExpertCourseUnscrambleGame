@@ -7,7 +7,7 @@ import androidx.appcompat.widget.AppCompatButton
 
 class VisibilityButton : AppCompatButton, UpdateVisibility {
 
-    private lateinit var state: VisibilityUiState
+    private var state: VisibilityUiState = VisibilityUiState.Gone
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)

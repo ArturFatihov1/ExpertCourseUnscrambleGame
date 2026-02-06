@@ -1,7 +1,7 @@
 package com.example.expertcourseunscramblegame.load.presentation
 
 import com.example.expertcourseunscramblegame.R
-import com.example.expertcourseunscramblegame.game.NavigateToGame
+import com.example.expertcourseunscramblegame.game.presentation.NavigateToGame
 import com.example.expertcourseunscramblegame.views.error.ErrorUiState
 import com.example.expertcourseunscramblegame.views.error.UpdateError
 import com.example.expertcourseunscramblegame.views.visibilitybutton.UpdateVisibility

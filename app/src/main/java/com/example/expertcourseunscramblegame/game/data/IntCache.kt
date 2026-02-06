@@ -1,4 +1,4 @@
-package com.example.expertcourseunscramblegame.game
+package com.example.expertcourseunscramblegame.game.data
 
 import android.content.SharedPreferences
 

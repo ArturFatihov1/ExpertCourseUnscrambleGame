@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.expertcourseunscramblegame.databinding.FragmentStatsBinding
 import com.example.expertcourseunscramblegame.di.ProvideViewModel
-import com.example.expertcourseunscramblegame.game.NavigateToGame
+import com.example.expertcourseunscramblegame.load.presentation.NavigateToLoad
 import com.example.expertcourseunscramblegame.views.stats.StatsUiState
 
 class StatsFragment : Fragment() {
@@ -31,7 +31,7 @@ class StatsFragment : Fragment() {
 
         binding.newGameButton.setOnClickListener {
             viewModel.clear()
-            (requireActivity() as NavigateToGame).navigateToGame()
+            (requireActivity() as NavigateToLoad).navigateToLoad()
         }
         val state: StatsUiState = viewModel.init(savedInstanceState == null)
         binding.statsTextView.update(state)

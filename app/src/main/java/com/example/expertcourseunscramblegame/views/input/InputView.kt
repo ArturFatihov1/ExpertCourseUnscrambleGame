@@ -8,10 +8,10 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.example.expertcourseunscramblegame.R
 import com.example.expertcourseunscramblegame.databinding.InputBinding
-import com.example.expertcourseunscramblegame.game.InputUiState
+import com.example.expertcourseunscramblegame.game.presentation.InputUiState
 
 class InputView : FrameLayout, UpdateInput {
-    private lateinit var state: InputUiState
+    private var state: InputUiState = InputUiState.Initial("")
     private val binding = InputBinding.inflate(LayoutInflater.from(context), this, true)
 
     constructor(context: Context) : super(context)

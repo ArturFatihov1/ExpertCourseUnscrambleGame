@@ -1,7 +1,7 @@
 package com.example.expertcourseunscramblegame.stats
 
 import android.content.SharedPreferences
-import com.example.expertcourseunscramblegame.game.IntCache
+import com.example.expertcourseunscramblegame.game.data.IntCache
 
 interface StatsCache {
 

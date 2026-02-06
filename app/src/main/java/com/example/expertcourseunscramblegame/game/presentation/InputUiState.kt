@@ -1,4 +1,4 @@
-package com.example.expertcourseunscramblegame.game
+package com.example.expertcourseunscramblegame.game.presentation
 
 import com.example.expertcourseunscramblegame.views.input.UpdateInput
 import java.io.Serializable

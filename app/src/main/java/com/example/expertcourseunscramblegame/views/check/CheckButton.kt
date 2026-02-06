@@ -4,10 +4,10 @@ import android.content.Context
 import android.os.Parcelable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatButton
-import com.example.expertcourseunscramblegame.game.CheckUiState
+import com.example.expertcourseunscramblegame.game.presentation.CheckUiState
 
 class CheckButton : AppCompatButton, UpdateCheckButton {
-    private lateinit var state: CheckUiState
+    private var state: CheckUiState = CheckUiState.Invisible
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)

@@ -1,4 +1,4 @@
-package com.example.expertcourseunscramblegame.load
+package com.example.expertcourseunscramblegame.main
 
 import android.os.Handler
 import android.os.Looper

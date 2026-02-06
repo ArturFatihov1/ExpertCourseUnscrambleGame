@@ -1,198 +1,251 @@
 package com.example.expertcourseunscramblegame.game
 
+import com.example.expertcourseunscramblegame.game.data.GameRepository
+import com.example.expertcourseunscramblegame.game.presentation.GameObservable
+import com.example.expertcourseunscramblegame.game.presentation.GameUiState
+import com.example.expertcourseunscramblegame.game.presentation.GameViewModel
+import com.example.expertcourseunscramblegame.load.FakeRunAsyncImmediate
+import com.example.expertcourseunscramblegame.load.FakeUiObservable
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
+
 class GameViewModelTest {
 
+    private lateinit var observable: FakeGameObservable
     private lateinit var viewModel: GameViewModel
+    private lateinit var runAsync: FakeRunAsyncImmediate
+    private lateinit var repository: FakeRepository
     private lateinit var clearViewModel: FakeClearViewModel
 
     @Before
     fun setup() {
         clearViewModel = FakeClearViewModel()
-        viewModel = GameViewModel(repository = FakeRepository(), clearViewModel = clearViewModel)
+        observable = FakeGameObservable.Base()
+        runAsync = FakeRunAsyncImmediate()
+        repository = FakeRepository()
+        viewModel = GameViewModel(
+            repository = repository,
+            runAsync = runAsync,
+            observable = observable,
+            clearViewModel = clearViewModel
+        )
     }
 
     /**
      * UGTC-01
      */
-
     @Test
     fun caseNumber1() {
-        var actual: GameUiState = viewModel.init()
+        viewModel.init()
         var expected: GameUiState = GameUiState.Initial(shuffledWord = "f1")
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
-        actual = viewModel.handleUserInput(text = "1")
+        viewModel.handleUserInput(text = "1")
         expected = GameUiState.Insufficient
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
-        actual = viewModel.handleUserInput(text = "1f")
+        viewModel.handleUserInput(text = "1f")
         expected = GameUiState.Sufficient
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
-        actual = viewModel.check(text = "1f")
+        viewModel.check(text = "1f")
         expected = GameUiState.Correct
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
-        actual = viewModel.next()
+        viewModel.next()
         expected = GameUiState.Initial(shuffledWord = "f2")
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
     }
 
     /**
      * UGTC-02
      */
-
     @Test
     fun caseNumber2() {
-        var actual: GameUiState = viewModel.init()
+        /*
+        open app
+        state is initial (some word)
+         */
+        viewModel.init()
         var expected: GameUiState = GameUiState.Initial(shuffledWord = "f1")
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
-        actual = viewModel.skip()
+        /*
+        click skip
+        state is initial (another word)
+         */
+        viewModel.skip()
         expected = GameUiState.Initial(shuffledWord = "f2")
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
-        actual = viewModel.handleUserInput(text = "1")
+        /*
+        input letter
+        state is insufficient
+        click skip
+        state is initial (another word)
+         */
+        viewModel.handleUserInput(text = "1")
         expected = GameUiState.Insufficient
-        assertEquals(expected, actual)
-        actual = viewModel.skip()
+        assertEquals(expected, observable.postUiStateCalledList.last())
+        viewModel.skip()
         expected = GameUiState.Initial(shuffledWord = "f3")
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
-        actual = viewModel.handleUserInput(text = "f")
+        /*
+        input letters
+        state is insufficient
+        input more letters
+        state is sufficient
+        click skip
+        state is initial (another word)
+         */
+        viewModel.handleUserInput(text = "f")
         expected = GameUiState.Insufficient
-        assertEquals(expected, actual)
-        actual = viewModel.handleUserInput(text = "f1")
+        assertEquals(expected, observable.postUiStateCalledList.last())
+        viewModel.handleUserInput(text = "f1")
         expected = GameUiState.Sufficient
-        assertEquals(expected, actual)
-        actual = viewModel.skip()
+        assertEquals(expected, observable.postUiStateCalledList.last())
+        viewModel.skip()
         expected = GameUiState.Initial(shuffledWord = "f4")
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
-        actual = viewModel.handleUserInput(text = "f")
+        /*
+        input letters
+        state is insufficient
+        input more letters
+        state is sufficient
+        click check button
+        state is incorrect
+        click skip
+        state is initial
+         */
+        viewModel.handleUserInput(text = "f")
         expected = GameUiState.Insufficient
-        assertEquals(expected, actual)
-        actual = viewModel.handleUserInput(text = "f1")
+        assertEquals(expected, observable.postUiStateCalledList.last())
+        viewModel.handleUserInput(text = "f1")
         expected = GameUiState.Sufficient
-        assertEquals(expected, actual)
-        actual = viewModel.check(text = "f1")
+        assertEquals(expected, observable.postUiStateCalledList.last())
+        viewModel.check(text = "f1")
         expected = GameUiState.Incorrect
-        assertEquals(expected, actual)
-        actual = viewModel.skip()
+        assertEquals(expected, observable.postUiStateCalledList.last())
+        viewModel.skip()
         expected = GameUiState.Initial(shuffledWord = "f5")
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
-        actual = viewModel.handleUserInput(text = "f")
+        /*
+       input letters
+       state is insufficient
+       input more letters
+       state is sufficient
+       click check
+       state is incorrect
+       remove 1 letter
+       state is insufficient
+       input more letters
+       state is sufficient
+       input more letters
+       state is insufficient
+        */
+        viewModel.handleUserInput(text = "f")
         expected = GameUiState.Insufficient
-        assertEquals(expected, actual)
-        actual = viewModel.handleUserInput(text = "f1")
+        assertEquals(expected, observable.postUiStateCalledList.last())
+        viewModel.handleUserInput(text = "f1")
         expected = GameUiState.Sufficient
-        assertEquals(expected, actual)
-        actual = viewModel.check(text = "f1")
+        assertEquals(expected, observable.postUiStateCalledList.last())
+        viewModel.check(text = "f1")
         expected = GameUiState.Incorrect
-        assertEquals(expected, actual)
-        actual = viewModel.handleUserInput(text = "f")
+        assertEquals(expected, observable.postUiStateCalledList.last())
+        viewModel.handleUserInput(text = "f")
         expected = GameUiState.Insufficient
-        assertEquals(expected, actual)
-        actual = viewModel.handleUserInput(text = "f1")
+        assertEquals(expected, observable.postUiStateCalledList.last())
+        viewModel.handleUserInput(text = "f1")
         expected = GameUiState.Sufficient
-        assertEquals(expected, actual)
-        actual = viewModel.handleUserInput(text = "f12")
+        assertEquals(expected, observable.postUiStateCalledList.last())
+        viewModel.handleUserInput(text = "f12")
         expected = GameUiState.Insufficient
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
     }
 
     @Test
     fun testLastWordNext() {
-        viewModel = GameViewModel(
-            repository = FakeRepository(listOf("one", "two")),
-            clearViewModel = clearViewModel
-        )
+        repository.originalList = listOf("one", "two")
 
-        var actual: GameUiState = viewModel.init(isFirstRun = true)
+        viewModel.init(isFirstRun = true)
         var expected: GameUiState = GameUiState.Initial(shuffledWord = "one".reversed())
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
-        actual = viewModel.handleUserInput(text = "one")
+        viewModel.handleUserInput(text = "one")
         expected = GameUiState.Sufficient
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
-        actual = viewModel.check(text = "one")
+        viewModel.check(text = "one")
         expected = GameUiState.Correct
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
-        actual = viewModel.next()
+        viewModel.next()
         expected = GameUiState.Initial(shuffledWord = "two".reversed())
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
-        actual = viewModel.handleUserInput(text = "two")
+        viewModel.handleUserInput(text = "two")
         expected = GameUiState.Sufficient
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
-        actual = viewModel.check(text = "two")
+        viewModel.check(text = "two")
         expected = GameUiState.Correct
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
-        actual = viewModel.next()
+        viewModel.next()
         expected = GameUiState.Finish
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
         assertEquals(GameViewModel::class.java, clearViewModel.clasz)
     }
 
     @Test
     fun testLastWordSkip() {
-        viewModel = GameViewModel(
-            repository = FakeRepository(listOf("one", "two")),
-            clearViewModel = clearViewModel
-        )
+        repository.originalList = listOf("one", "two")
 
-        var actual: GameUiState = viewModel.init(isFirstRun = true)
+        viewModel.init(isFirstRun = true)
+
         var expected: GameUiState = GameUiState.Initial(shuffledWord = "one".reversed())
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
-        actual = viewModel.handleUserInput(text = "one")
+        viewModel.handleUserInput(text = "one")
         expected = GameUiState.Sufficient
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
-        actual = viewModel.check(text = "one")
+        viewModel.check(text = "one")
         expected = GameUiState.Correct
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
-        actual = viewModel.next()
+        viewModel.next()
         expected = GameUiState.Initial(shuffledWord = "two".reversed())
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
-        actual = viewModel.skip()
+        viewModel.skip()
         expected = GameUiState.Finish
-        assertEquals(expected, actual)
+        assertEquals(expected, observable.postUiStateCalledList.last())
 
         assertEquals(GameViewModel::class.java, clearViewModel.clasz)
     }
 }
 
-private class FakeRepository(
-    private var originalList: List<String> = listOf(
-        "1f",
-        "2f",
-        "3f",
-        "4f",
-        "5f",
-        "6f"
+private class FakeRepository : GameRepository {
+
+    var originalList: List<String> = listOf(
+        "1f", "2f", "3f", "4f", "5f", "6f"
     )
-) : GameRepository {
 
+    private val shuffledList
+        get() = originalList.map { it.reversed() }
 
-    private var shuffledList = originalList.map { it.reversed() }
     private var index = 0
 
-    override fun shuffledWord(): String = shuffledList[index]
+    override suspend fun shuffledWord(): String = shuffledList[index]
 
-    override fun isCorrect(text: String): Boolean {
+    override suspend fun isCorrect(text: String): Boolean {
         return originalList[index].equals(text, ignoreCase = true)
     }
 
@@ -202,7 +255,6 @@ private class FakeRepository(
 
     override fun next() {
         index++
-
         saveUserInput("")
     }
 
@@ -219,4 +271,9 @@ private class FakeRepository(
     override fun userInput(): String {
         return input
     }
+}
+
+
+private interface FakeGameObservable : FakeUiObservable<GameUiState>, GameObservable {
+    class Base : FakeUiObservable.Abstract<GameUiState>(), FakeGameObservable
 }

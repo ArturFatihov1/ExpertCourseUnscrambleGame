@@ -1,4 +1,4 @@
-package com.example.expertcourseunscramblegame.game
+package com.example.expertcourseunscramblegame.game.presentation
 
 import android.os.Bundle
 import android.text.Editable
@@ -6,18 +6,13 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.expertcourseunscramblegame.databinding.FragmentGameBinding
 import com.example.expertcourseunscramblegame.di.ProvideViewModel
+import com.example.expertcourseunscramblegame.main.AbstractFragment
 import com.example.expertcourseunscramblegame.stats.NavigateToStats
 
-class GameFragment : Fragment() {
 
-    private var _binding: FragmentGameBinding? = null
-    private val binding get() = _binding!!
-
-    private lateinit var uiState: GameUiState
-    private lateinit var viewModel: GameViewModel
+class GameFragment : AbstractFragment.Async<GameUiState, GameViewModel, FragmentGameBinding>() {
 
     private val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
@@ -25,12 +20,14 @@ class GameFragment : Fragment() {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
 
         override fun afterTextChanged(s: Editable?) {
-            uiState = viewModel.handleUserInput(text = s.toString())
-            update.invoke()
+            viewModel.handleUserInput(text = s.toString())
         }
-
     }
-    private val update: () -> Unit = {
+
+    override fun inflate(inflater: LayoutInflater, container: ViewGroup?) =
+        FragmentGameBinding.inflate(inflater, container, false)
+
+    override val update: (GameUiState) -> Unit = { uiState ->
         uiState.update(
             binding.shuffledWordTextView,
             binding.inputView,
@@ -41,37 +38,25 @@ class GameFragment : Fragment() {
         uiState.navigate(requireActivity() as NavigateToStats)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentGameBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel =
             (requireActivity() as ProvideViewModel).makeViewModel(GameViewModel::class.java)
 
-        binding.skipButton.setOnClickListener {
-            uiState = viewModel.skip()
-            update.invoke()
-        }
         binding.nextButton.setOnClickListener {
-            uiState = viewModel.next()
-            update.invoke()
-
+            viewModel.next()
         }
+
         binding.checkButton.setOnClickListener {
-            uiState = viewModel.check(text = binding.inputView.text())
-            update.invoke()
-
+            viewModel.check(text = binding.inputView.text())
         }
 
-        uiState = viewModel.init(savedInstanceState == null)
-        update.invoke()
+        binding.skipButton.setOnClickListener {
+            viewModel.skip()
+        }
+
+        viewModel.init(savedInstanceState == null)
     }
 
     override fun onResume() {
@@ -82,10 +67,5 @@ class GameFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         binding.inputView.removeTextChangedListener(textWatcher)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

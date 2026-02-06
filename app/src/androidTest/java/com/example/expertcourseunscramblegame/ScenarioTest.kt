@@ -227,7 +227,7 @@ class ScenarioTest {
         statsPage.clickNewGame()
 
         setup()
-        gamePage.assertInitialState()
+        caseNumber4()
 
     }
 

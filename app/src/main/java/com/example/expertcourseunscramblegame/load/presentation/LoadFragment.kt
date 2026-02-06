@@ -6,21 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.expertcourseunscramblegame.databinding.FragmentLoadBinding
 import com.example.expertcourseunscramblegame.di.ProvideViewModel
-import com.example.expertcourseunscramblegame.game.NavigateToGame
-import com.example.expertcourseunscramblegame.load.AbstractFragment
+import com.example.expertcourseunscramblegame.game.presentation.NavigateToGame
+import com.example.expertcourseunscramblegame.main.AbstractFragment
 
-class LoadFragment : AbstractFragment<LoadUiState, LoadViewModel>() {
-    private var _binding: FragmentLoadBinding? = null
-    private val binding get() = _binding!!
+class LoadFragment : AbstractFragment.Async<LoadUiState, LoadViewModel, FragmentLoadBinding>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentLoadBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun inflate(inflater: LayoutInflater, container: ViewGroup?) =
+        FragmentLoadBinding.inflate(inflater, container, false)
 
     override val update: (LoadUiState) -> Unit = { uiState ->
         uiState.show(
@@ -31,12 +23,10 @@ class LoadFragment : AbstractFragment<LoadUiState, LoadViewModel>() {
         uiState.navigate((requireActivity() as NavigateToGame))
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel =
-            (requireActivity() as ProvideViewModel).makeViewModel(LoadViewModel::class.java)
+        viewModel = (requireActivity() as ProvideViewModel).makeViewModel(LoadViewModel::class.java)
 
         binding.retryButton.setOnClickListener {
             viewModel.load()
@@ -44,10 +34,4 @@ class LoadFragment : AbstractFragment<LoadUiState, LoadViewModel>() {
 
         viewModel.load(isFirstRun = savedInstanceState == null)
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 }

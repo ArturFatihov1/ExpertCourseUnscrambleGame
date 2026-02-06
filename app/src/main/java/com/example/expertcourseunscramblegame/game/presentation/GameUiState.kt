@@ -1,4 +1,4 @@
-package com.example.expertcourseunscramblegame.game
+package com.example.expertcourseunscramblegame.game.presentation
 
 import com.example.expertcourseunscramblegame.stats.NavigateToStats
 import com.example.expertcourseunscramblegame.views.check.UpdateCheckButton

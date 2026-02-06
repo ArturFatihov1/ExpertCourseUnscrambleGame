@@ -1,4 +1,4 @@
-package com.example.expertcourseunscramblegame.game
+package com.example.expertcourseunscramblegame.game.presentation
 
 import android.view.View
 import com.example.expertcourseunscramblegame.views.check.UpdateCheckButton

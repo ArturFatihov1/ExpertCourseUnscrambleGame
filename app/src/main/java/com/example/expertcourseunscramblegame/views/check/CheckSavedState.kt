@@ -5,7 +5,7 @@ import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
 import android.view.View
-import com.example.expertcourseunscramblegame.game.CheckUiState
+import com.example.expertcourseunscramblegame.game.presentation.CheckUiState
 
 
 class CheckSavedState : View.BaseSavedState {

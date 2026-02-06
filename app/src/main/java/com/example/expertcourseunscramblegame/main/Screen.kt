@@ -17,4 +17,13 @@ interface Screen {
         protected open fun newFragment(): Fragment =
             fragmentClass.getDeclaredConstructor().newInstance()
     }
+
+    object Empty : Screen {
+
+        override fun show(
+            containerId: Int,
+            fragmentManager: FragmentManager
+        ) = Unit
+
+    }
 }

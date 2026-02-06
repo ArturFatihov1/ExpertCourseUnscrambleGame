@@ -19,8 +19,9 @@ class MainActivity : AppCompatActivity(), Navigation, ProvideViewModel {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        if (savedInstanceState == null)
-            navigateToGame()
+        val viewModel = makeViewModel(MainViewModel::class.java)
+        val screen = viewModel.screen(savedInstanceState == null)
+        navigate(screen)
     }
 
     override fun navigate(screen: Screen) {

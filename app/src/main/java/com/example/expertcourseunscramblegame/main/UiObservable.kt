@@ -1,4 +1,4 @@
-package com.example.expertcourseunscramblegame.load
+package com.example.expertcourseunscramblegame.main
 
 interface UiObservable<T : Any> {
 

@@ -3,9 +3,12 @@ package com.example.expertcourseunscramblegame.load
 import com.example.expertcourseunscramblegame.game.FakeClearViewModel
 import com.example.expertcourseunscramblegame.load.data.LoadRepository
 import com.example.expertcourseunscramblegame.load.data.NoInternetConnectionException
+import com.example.expertcourseunscramblegame.load.data.cloud.HandleError
 import com.example.expertcourseunscramblegame.load.presentation.LoadUiObservable
 import com.example.expertcourseunscramblegame.load.presentation.LoadUiState
 import com.example.expertcourseunscramblegame.load.presentation.LoadViewModel
+import com.example.expertcourseunscramblegame.main.RunAsync
+import com.example.expertcourseunscramblegame.main.UiObservable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -32,7 +35,8 @@ class LoadViewModelTest {
                 repository = repository,
                 observable = observable,
                 runAsync = runAsync,
-                clearViewModel
+                clearViewModel,
+                handleError = HandleError.DomainToUi()
             )
         fragment = FakeFragment()
     }
@@ -193,5 +197,18 @@ class FakeRunAsync : RunAsync {
 
     fun returnResult() {
         ui.invoke(result!!)
+    }
+}
+
+@Suppress("UNCHECKED_CAST")
+class FakeRunAsyncImmediate : RunAsync {
+
+    override fun <T : Any> handleAsync(
+        coroutineScope: CoroutineScope,
+        heavyOperation: suspend () -> T,
+        uiUpdate: (T) -> Unit
+    ) = runBlocking {
+        val result = heavyOperation.invoke()
+        uiUpdate.invoke(result)
     }
 }
