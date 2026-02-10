@@ -8,6 +8,13 @@ android {
     namespace = "com.example.expertcourseunscramblegame"
     compileSdk = 35
 
+    packaging {
+        resources {
+            excludes += "META-INF/versions/9/OSGI-INF/MANIFEST.MF"
+
+        }
+    }
+
     defaultConfig {
         applicationId = "com.example.expertcourseunscramblegame"
         minSdk = 24

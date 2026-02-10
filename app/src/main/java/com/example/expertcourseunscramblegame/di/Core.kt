@@ -11,7 +11,7 @@ import com.example.expertcourseunscramblegame.stats.StatsCache
 
 class Core(val context: Context, val clearViewModel: ClearViewModel) {
 
-    val runUiTests = true
+    val runUiTests = false
 
     val runAsync: RunAsync = RunAsync.Base()
 
